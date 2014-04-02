@@ -1,0 +1,35 @@
+require 'socket'
+
+webserver = TCPServer.new('127.0.0.1', 1234)
+#1234 = port
+
+
+while true
+session = webserver.accept #opens the connection
+request = session.gets
+
+
+  session.print "Http/1.1.200.OK\r\n\Content-type:text/html\r\n\r\n" #introduces blank line
+  request = session.gets
+
+  if request != nil
+  trimmedrequest = request.gsub(/GET/ \//, '').gsub(/ HTTP.*/, '')
+  puts trimmedrequest
+
+  filename = trimmedrequest.chomp
+  filename ="index.html" if filename == ""
+
+  if filename =- /css/
+    session.print "Content-type:text/css\r\n\r\n"
+  else
+    session.print "Content-type:text/css\r\n\r\n"
+
+
+  begin
+    displayfile = File.open(filename, 'r')
+    content = displayfile.read()
+    session.print content #prints the body 
+  rescure Errno::ENDNET
+  session.print "File not found"
+  end
+end

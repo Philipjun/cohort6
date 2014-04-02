@@ -1,0 +1,23 @@
+  file =File.open('stuff.txt', 'r')
+  puts file.read
+  file.close 
+
+  #option 3
+  File.open('stuff.txt', 'r') {|f| puts f.read}
+
+  #read a file a line at a time
+  File.open('stuff.txt', 'r').each line do |line| puts line
+  end
+
+#read a file and copy it to another file
+#out = File.open('stuff.txt', w')
+#file_in =File.open('stuff.txt', 'r')
+
+
+#file_in.each_line do |line|
+#out.puts line
+end
+
+#file_in.close
+#out.close
+
